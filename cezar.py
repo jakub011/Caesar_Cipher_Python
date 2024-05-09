@@ -1,25 +1,14 @@
 import art
 from art import logo
 
-alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-
 def cezar(direction,text,shift):
     encrypt_text = "" 
     for i in text:
-        if i  in alphabet:
-            index = alphabet.index(i)
-            if direction == "encode":
-                letter = index+shift
-                if letter > 26:
-                        letter -= 26
-                encrypt_text += alphabet[letter%len(alphabet)]
-            elif direction == "decode":
-                letter = index-shift
-                if letter < 0:
-                    letter += 26
-                encrypt_text += alphabet[letter%len(alphabet)]
-            elif i not in alphabet:
-                encrypt_text += i
+        if i.isalpha():
+            if direction == 'encode':
+                encrypt_text += chr((ord(i)-97+shift)%26+97)
+            elif direction == 'decode':
+                encrypt_text += chr((ord(i)-97-shift)%26+97)
         else:
             encrypt_text += i
     print(encrypt_text)
@@ -37,3 +26,4 @@ while(stop == False):
     if again == "no":
         stop = True
         print("Goodbye")
+
